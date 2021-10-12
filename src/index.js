@@ -6,10 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Route ,BrowserRouter} from 'react-router-dom';
 import Login  from './components/Login';
 import App from './App';
-
+import {CookiesProvider} from 'react-cookie';
 
 function Router() {
  return(
+   <CookiesProvider>
+
+  
    <BrowserRouter>
    <Route exact path ='/' component ={Login} />
    <Route exact path ='/articles' component ={App} />
@@ -17,6 +20,7 @@ function Router() {
   
    
    </BrowserRouter>
+   </CookiesProvider>
   
  )
 

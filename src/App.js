@@ -2,6 +2,7 @@
 import React, { useState ,useEffect} from 'react';
 import Article from './components/Article';
 import Form from './components/Form';
+import {useCookies} from 'react-cookie';
 import './App.css'
 
 
@@ -9,12 +10,13 @@ function App() {
 
   const[articles, setArticles] =useState([])
   const[editArticle, setEditArticle] =useState(null)
+  const[token] = useCookies(['mytoken'])
   useEffect(() => {
     fetch('http://127.0.0.1:8000/apis/articles/',{
       'method':'GET',
       headers: {
         'content-Type':'application/json',
-        'Authorization':'Token def26336c67d397b6766717657f5c39b2007e61c'
+        'Authorization':`Token ${token['mytoken']}`
       }
     })
     .then(res => res.json())

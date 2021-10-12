@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import {useCookies} from 'react-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import APIser from '../APIser';
 
 function Form(props) {
     const [tittle,setTitle] = useState('')
     const [description,setDescription] = useState(props.article.description)
+    const[token] = useCookies(['mytoken'])
 
     const updateArticle = () => {
-        APIser.updateArticle(props.article.id,{tittle,description})
+        APIser.updateArticle(props.article.id,{tittle,description},token['mytoken'])
         .then(res =>props.UpdatedInformation(res))
     }
     useEffect(() =>{
@@ -16,7 +18,7 @@ function Form(props) {
     },[props.article])
 
     const insertArticle= ()=> {
-        APIser.insertArticle({tittle,description})
+        APIser.insertArticle({tittle,description},token['mytoken'])
         .then(res =>props.InsertedInformation(res))
 
     }

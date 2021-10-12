@@ -1,12 +1,15 @@
 import React from 'react';
 import APIser from '../APIser';
+import {useCookies} from 'react-cookie';
 
 function Article(props) {
+    const[token] = useCookies(['mytoken'])
+
     const editBtn =(article) => {
         props.editBtn(article)
     }
     const deleteBtn =(article) =>{
-        APIser.DeleteArticle(article.id)
+        APIser.DeleteArticle(article.id,token['mytoken'])
         .then(()=> props.deleteBtn(article))
        
     }
